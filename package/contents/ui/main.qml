@@ -18,35 +18,94 @@
  ***************************************************************************/
 
 import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
-    property int minimumWidth: 210
-    property int minimumHeight: 210
-
-    PlasmaCore.Svg {
-        //Instantiate a svg, set the svg image path
-        id: mySvg
-        imagePath: plasmoid.file("images", "pairs.svgz")
+  id:root
+  //TODO: not getting set anywhere
+  property bool online: true
+  property bool showUpcoming: plasmoid.readConfig("upcoming")
+  property bool showConflicts: plasmoid.readConfig("conflicts")
+  property bool showRecorded: plasmoid.readConfig("recorded")
+  property int refreshEvery : plasmoid.readConfig("refreshevery")
+  function configChanged() {
+    root.showUpcoming = plasmoid.readConfig("upcoming");
+    root.showConflicts = plasmoid.readConfig("conflicts");
+    root.showRecorded = plasmoid.readConfig("recorded");
+    root.refreshEvery = plasmoid.readConfig("refreshevery");
+  }
+  Component.onCompleted: { // read configuration, in case of change in configuration
+    plasmoid.addEventListener('ConfigChanged', configChanged);
+  }
+  // no effect
+  //property int minimumWidth: paintedWidth
+  //property int minimumHeight: paintedHeight
+  PlasmaComponents.TabBar {
+    id: tabBar
+    height: 27
+    width: 0.9 * parent.width
+    visible: online
+    anchors {
+      top: root.top
+      topMargin: 5
+      horizontalCenter: parent.horizontalCenter
     }
-
-    Column {
-        spacing: 10
-
-        PlasmaCore.SvgItem {
-            id: mySvgItem
-            width: 180
-            height: 180
-            anchors.horizontalCenter: parent.horizontalCenter
-            svg: mySvg //use the svg instanciated above
-        }
-
-        PlasmaComponents.Label {
-            text: i18n("A column with a SVG and a label")
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-            }
-        }
+    PlasmaComponents.TabButton {
+      tab: statusScreen
+      text: i18n("Status")
     }
+    PlasmaComponents.TabButton {
+      visible: showUpcoming
+      tab: upcomingListScreen
+      text:i18n("Upcoming Recordings")
+    }
+    PlasmaComponents.TabButton {
+      visible: showRecorded
+      tab: recordedListScreen
+      text:i18n("Last Recordings")
+    }
+    PlasmaComponents.TabButton {
+      visible: showConflicts
+      //TODO: not yet implemented
+      tab: upcomingListScreen
+      text:i18n("Recording Conflicts")
+    }
+  }
+  PlasmaComponents.TabGroup {
+    anchors {
+      top: tabBar.bottom
+      left: root.left
+      right: root.right
+      bottom: root.bottom
+      margins: 10
+    }
+    StatusScreen {
+      id: statusScreen
+      anchors.fill: parent
+      statusModel: model
+    }
+    UpcomingListScreen {
+      id: upcomingListScreen
+      anchors.fill: parent
+      upcomingListModel: model.upcoming
+    }
+    RecordedListScreen {
+      id: recordedListScreen
+      anchors.fill: parent
+      recordedListModel: model.recorded
+    }
+//     ConflictListScreen {
+//       id: conflictListScreen
+//       anchors.fill: parent
+//     }
+  }
+  UnavailableScreen {
+    visible: !online
+    anchors.fill: parent
+  }
+  Model {
+    id: model
+    interval: root.refreshEvery
+  }
 }

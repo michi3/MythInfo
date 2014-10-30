@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="main"/>
+  <group name="host">
+    <entry name="hostadd" type="String">
+      <label>blalabel</label>
+    </entry>
+    <entry name="port" type="Int">
+      <whatsthis>whats whtastis</whatsthis>
+      <tooltip>tooltip inside config xml</tooltip>
+      <default>6544</default>
+      <min>100</min>
+      <max>10000</max>
+    </entry>
+  </group>
+  <group name="general">
+    <entry name="refreshevery" type="Int">
+      <whatsthis>Refresh data every X minutes</whatsthis>
+      <tooltip>Refresh data every X minutes</tooltip>
+      <default>15</default>
+      <min>1</min>
+      <max>180</max>
+    </entry>
+    <entry name="itemscount" type="Int">
+      <whatsthis>halt wieviele whatsthis</whatsthis>
+      <tooltip>halt wieviele tooltip</tooltip>
+      <default>10</default>
+      <min>1</min>
+      <max>20</max>
+    </entry>
+    <entry name="enablenotifications" type="Bool">
+      <label>Enable notifications</label>
+      <default>false</default>
+    </entry>
+  </group>
+  <group name="screens">
+    <entry name="upcoming" type="Bool">
+      <label>Show upcoming recordings</label>
+      <default>true</default>
+    </entry>
+    <entry name="conflicts" type="Bool">
+      <label>Show conflicts</label>
+      <default>false</default>
+    </entry>
+    <entry name="recorded" type="Bool">
+      <label>Show past recordings</label>
+      <default>false</default>
+    </entry>
+  </group>
+</kcfg>

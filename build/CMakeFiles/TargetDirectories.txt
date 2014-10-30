@@ -1,0 +1,1 @@
+/home/michi/Projekte/MythInfo/build/CMakeFiles/uninstall.dir

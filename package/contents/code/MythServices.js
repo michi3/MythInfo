@@ -1,0 +1,55 @@
+function getBaseUrl(service) {
+  //TODO no ssh?
+  return "http://" + plasmoid.readConfig("hostadd") + ":" + plasmoid.readConfig("port") + "/" + service + "/";
+}
+
+//TODO: read fresh config value...should be a property or something
+function getPreferredItemsCount() {
+  return plasmoid.readConfig("itemscount");
+}
+
+function request(url, json, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = (function f() {
+    callback(xhr);
+  });
+  xhr.open('GET', url, true);
+  if (json)
+    xhr.setRequestHeader("Accept","application/json");
+  xhr.send();
+}
+
+function getUpcomingList() {
+  var method = "GetUpcomingList?Count=" + getPreferredItemsCount();
+  request(getBaseUrl("Dvr") + method, false, getUpcomingListCallback);
+}
+
+function getUpcomingListCallback(xhr) {
+  
+  if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+    model.upcoming.xml = xhr.responseText;
+  }
+}
+
+function getRecordedList() {
+  var method = "GetRecordedList?Count=" + getPreferredItemsCount() + "&Descending=true";
+  request(getBaseUrl("Dvr") + method, false, getRecordedListCallback);
+}
+
+function getRecordedListCallback(xhr) {
+  if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+    model.recorded.xml = xhr.responseText;
+  }
+}
+
+function getHostName() {
+  var method = "GetHostName";
+  request(getBaseUrl("Myth") + method, true, getHostNameCallback);
+}
+
+function getHostNameCallback(xhr) {
+  if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+    ret = JSON.parse(xhr.responseText);
+    model.hostname = ret.String;
+  }
+}
