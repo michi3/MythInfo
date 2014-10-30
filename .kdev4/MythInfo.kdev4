@@ -28,7 +28,7 @@ Type=PlasmoidLauncherType
 [Launch][Launch Configuration 0][Data]
 Arguments=--formfactor,Eben
 Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
-PlasmoidIdentifier=
+PlasmoidIdentifier=package/
 
 [Project]
 VersionControlSupport=kdevgit
