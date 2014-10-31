@@ -7,20 +7,22 @@ import "plasmapackage:/code/xdate.js" as Jxd
 Item {
   property QtObject statusModel
   PlasmaExtras.Title {
-    id: title
+    id: hostnameTitle
     anchors.horizontalCenter: parent.horizontalCenter
     text: parent.statusModel.hostname
   }
   Column {
     anchors {
-      top: title.bottom
+      top: hostnameTitle.bottom
       left: parent.left
     }
     Text {
-      text: "next recordings:"
+      property string firstTitle: parent.parent.statusModel.upcoming.count >= 1 ? parent.parent.statusModel.upcoming.get(0).title : "..."
+      text: "next recording: " + firstTitle
     }
     Text {
-      text: "next recordings:"
+      property string lastTitle: parent.parent.statusModel.recorded.count >= 1 ? parent.parent.statusModel.recorded.get(0).title : "..."
+      text: "last recording: " + lastTitle
     }
   }
 }
