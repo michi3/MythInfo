@@ -5,6 +5,8 @@ It uses the MythTV Service API to collect information.
 
 This repo is a KDevelop project.
 
+<b>don't forget to configure the plasmoid properly, there is still no "host not available screen". You just see nothing on missconfiguration</b>
+
 Features:
 - shows upcoming recordings
 - shows past recordings
