@@ -1,5 +1,5 @@
 function getBaseUrl(service) {
-  //TODO no ssh?
+  //TODO no ssl?
   return "http://" + plasmoid.readConfig("hostadd") + ":" + plasmoid.readConfig("port") + "/" + service + "/";
 }
 

@@ -1,35 +1,35 @@
-Plasma Applet Template
-----------------------
+=== MythTV Plasmoid (Alpha) ===
 
--- Build instructions --
+This is a KDE QT4 Plasmoid completely written in QML/JS using QtQuick 1.1.
+It uses the MythTV Service API to collect information.
 
-cd /where/your/applet/is/generated
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=$KDEDIRS .. 
-make 
-make install
+Features:
+- shows upcoming recordings
+- shows past recordings
 
-(your $KDEDIRS is where you install your KDE 4, set this variable in your .bashrc file)
+Planned features:
+- show recording conflicts
+- sending notifications to frontends
+- notification center support
+- QT5?
+- TODO
 
-Restart plasma to load the applet 
-(in a terminal type: 
-kquitapp plasma-desktop 
-and then
-plasma-desktop)
+Things to do:
+- meta information
+- localization
+- ssl support
+- 
 
-or view it with 
-plasmoidviewer YourAppletName
+Installation instructions:
+mkdir target
+cd target
+git clone https://github.com/michi3/MythInfo.git
+cd MythInfo
+plasmapkg -i package
 
-You might need to run kbuildsycoca4
-in order to get the .desktop file recognized.
+Tested with:
+- latest KDE4 64Bit available on ArchLinux
+- latest MythTV 32Bit available on ArchLinux
 
--- Tutorials and resources --
-The explanation of the template
-http://techbase.kde.org/index.php?title=Development/Tutorials/Plasma/GettingStarted
-
-Plasma techbase pages
-http://techbase.kde.org/Projects/Plasma
-
-Plasma QML API explained
-http://techbase.kde.org/Development/Tutorials/Plasma/QML/API
+THX to:
+- www.mythtv.org
