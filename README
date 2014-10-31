@@ -3,6 +3,8 @@
 This is a KDE QT4 Plasmoid completely written in QML/JS using QtQuick 1.1.
 It uses the MythTV Service API to collect information.
 
+This repo is a KDevelop project.
+
 Features:
 - shows upcoming recordings
 - shows past recordings
