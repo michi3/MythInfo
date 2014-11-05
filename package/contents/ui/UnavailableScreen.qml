@@ -5,11 +5,10 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 Item {
   property QtObject unavailableModel
   PlasmaComponents.BusyIndicator {
-    id: busy
     running: true
     anchors {
       horizontalCenter: parent.horizontalCenter
-      verticalCenter: parent.verticalCenter
+      bottom: head.top
     }
   }
   PlasmaExtras.Heading {
@@ -18,7 +17,7 @@ Item {
     level: 3
     anchors {
       horizontalCenter: parent.horizontalCenter
-      top: busy.bottom
+      verticalCenter: parent.verticalCenter
     }
   }
   Text {
