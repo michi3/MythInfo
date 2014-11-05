@@ -76,7 +76,8 @@ Item {
       text:i18n("Last Recordings")
     }
     PlasmaComponents.TabButton {
-      visible: showConflicts
+      //visible: showConflicts
+      visible: false
       //TODO: not yet implemented
       tab: upcomingListScreen
       text:i18n("Recording Conflicts")
