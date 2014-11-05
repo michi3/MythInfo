@@ -52,6 +52,8 @@ function getHostNameCallback(xhr) {
     if (xhr.status == 200) {
       ret = JSON.parse(xhr.responseText);
       model.hostname = ret.String;
+      // if already online, don't restart the timer -> loop
+      //TODO: just return is not the best code
       if (model.online)
 	return;
       model.online = true;
