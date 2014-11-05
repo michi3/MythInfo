@@ -14,7 +14,7 @@ Item {
   }
   PlasmaExtras.Heading {
     id: head
-    text: "Myth TV Backend not found"
+    text: "Myth TV Backend not found!"
     level: 3
     anchors {
       horizontalCenter: parent.horizontalCenter
@@ -22,7 +22,7 @@ Item {
     }
   }
   Text {
-    text: "Your backend is offline or you missconfigured it. Don't forget to enable the Service API in the backend"
+    text: "Your backend is offline or you missconfigured this. Don't forget to enable the Service API in the backend"
     anchors {
       horizontalCenter: parent.horizontalCenter
       top: head.bottom
