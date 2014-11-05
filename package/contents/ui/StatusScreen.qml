@@ -11,6 +11,13 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     text: parent.statusModel.hostname
   }
+  Image {
+    source: "plasmapackage:/images/mythtv.png"
+    anchors {
+      horizontalCenter: parent.horizontalCenter
+      verticalCenter: parent.verticalCenter
+    }
+  }
   Column {
     anchors {
       top: hostnameTitle.bottom
