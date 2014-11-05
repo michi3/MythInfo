@@ -23,17 +23,27 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
   id:root
-  //TODO: not getting set anywhere
-  property bool online: true
   property bool showUpcoming: plasmoid.readConfig("upcoming")
   property bool showConflicts: plasmoid.readConfig("conflicts")
   property bool showRecorded: plasmoid.readConfig("recorded")
-  property int refreshEvery : plasmoid.readConfig("refreshevery")
+  property int refreshEvery: plasmoid.readConfig("refreshevery")
+  //TODO: == or ===?
+  property bool configError: plasmoid.readConfig("hostadd") == ""
   function configChanged() {
     root.showUpcoming = plasmoid.readConfig("upcoming");
     root.showConflicts = plasmoid.readConfig("conflicts");
     root.showRecorded = plasmoid.readConfig("recorded");
     root.refreshEvery = plasmoid.readConfig("refreshevery");
+    //TODO: == or ===?
+    //TODO: do this also on start and not only on config change
+    if (plasmoid.readConfig("hostadd") == "") {
+      configError = true
+      model.timer.stop();
+    } else {
+      configError = false;
+      model.online = false;
+      model.timer.restart();
+    }
   }
   Component.onCompleted: { // read configuration, in case of change in configuration
     plasmoid.addEventListener('ConfigChanged', configChanged);
@@ -45,7 +55,7 @@ Item {
     id: tabBar
     height: 27
     width: 0.9 * parent.width
-    visible: online
+    visible: model.online && !configError
     anchors {
       top: root.top
       topMargin: 5
@@ -73,6 +83,7 @@ Item {
     }
   }
   PlasmaComponents.TabGroup {
+    visible: model.online && !configError
     anchors {
       top: tabBar.bottom
       left: root.left
@@ -101,8 +112,9 @@ Item {
 //     }
   }
   UnavailableScreen {
-    visible: !online
+    visible: !model.online || configError
     anchors.fill: parent
+    unavailableModel: model
   }
   Model {
     id: model

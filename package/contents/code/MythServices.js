@@ -48,8 +48,17 @@ function getHostName() {
 }
 
 function getHostNameCallback(xhr) {
-  if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-    ret = JSON.parse(xhr.responseText);
-    model.hostname = ret.String;
+  if (xhr.readyState == XMLHttpRequest.DONE) {
+    if (xhr.status == 200) {
+      ret = JSON.parse(xhr.responseText);
+      model.hostname = ret.String;
+      if (model.online)
+	return;
+      model.online = true;
+      model.timer.restart();
+    } else {
+      model.online = false;
+    }
   }
+  
 }

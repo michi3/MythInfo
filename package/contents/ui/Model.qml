@@ -4,18 +4,22 @@ import "plasmapackage:/code/MythServices.js" as Myth
 Item {
   property alias upcoming: upcomingListModel
   property alias recorded: recordedListModel
+  property alias timer: timer
   property int interval
   property string hostname
+  property bool online: false
   Timer {
+    id: timer
     interval: parent.interval * 60000
-    //running: parent.active
     running: true
     repeat: true
     triggeredOnStart: true
     onTriggered: {
       Myth.getHostName();
-      Myth.getUpcomingList();
-      Myth.getRecordedList();
+      if (online) {
+	Myth.getUpcomingList();
+	Myth.getRecordedList();
+      }
       //TODO: reset indizes
     }
   }
