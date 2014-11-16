@@ -21,9 +21,8 @@ PlasmaExtras.ScrollArea {
       Item {
 	id: listitem
 	clip: true
-        //FIXME: define expanded height depending on description text height
         //TODO: why i have to add the margin?
-        height: upcomingListView.i == index ? icon.height * 2 + 10 : icon.height + 10
+        height: upcomingListView.i == index ? descText.paintedHeight + descText.y + 10 : icon.height + 10
         Behavior on height {
 	  PropertyAnimation {
 	    duration: 500
@@ -101,6 +100,7 @@ PlasmaExtras.ScrollArea {
           text: Jxd.XDate(model.start).toLocaleTimeString() + " - " + Jxd.XDate(model.end).toLocaleTimeString()
         }
         Text {
+	  id: descText
           opacity: upcomingListView.i == index ? 1 : 0
           Behavior on opacity {
 	    PropertyAnimation {
