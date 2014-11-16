@@ -8,9 +8,9 @@ This repo is a KDevelop project.
 Features:
 - shows upcoming recordings
 - shows past recordings
+- shows recording conflicts
 
 Planned features:
-- show recording conflicts
 - sending notifications to frontends
 - notification center support
 - QT5?
