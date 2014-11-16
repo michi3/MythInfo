@@ -48,9 +48,12 @@ Item {
   Component.onCompleted: { // read configuration, in case of change in configuration
     plasmoid.addEventListener('ConfigChanged', configChanged);
   }
-  // no effect
-  //property int minimumWidth: paintedWidth
-  //property int minimumHeight: paintedHeight
+// not sure...
+//   property int implicitWidth: 500
+//   property int implicitHeight: 250
+//   property int minimumWidth: 500
+//   property int minimumHeight: 250
+  anchors.fill: parent
   PlasmaComponents.TabBar {
     id: tabBar
     height: 27
@@ -75,13 +78,12 @@ Item {
       tab: recordedListScreen
       text:i18n("Last Recordings")
     }
-    PlasmaComponents.TabButton {
-      //visible: showConflicts
-      visible: false
-      //TODO: not yet implemented
-      tab: upcomingListScreen
-      text:i18n("Recording Conflicts")
-    }
+//     PlasmaComponents.TabButton {
+//       visible: upcomingListScreen.visible
+//       //TODO: tab not implementet yet
+//       tab: upcomingListScreen
+//       text:i18n("Recording Conflicts")
+//     }
   }
   PlasmaComponents.TabGroup {
     visible: model.online && !configError
@@ -99,11 +101,13 @@ Item {
     }
     UpcomingListScreen {
       id: upcomingListScreen
+      visible: showUpcoming
       anchors.fill: parent
       upcomingListModel: model.upcoming
     }
     RecordedListScreen {
       id: recordedListScreen
+      visible: showRecorded
       anchors.fill: parent
       recordedListModel: model.recorded
     }
