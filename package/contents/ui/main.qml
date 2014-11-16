@@ -78,12 +78,11 @@ Item {
       tab: recordedListScreen
       text:i18n("Last Recordings")
     }
-//     PlasmaComponents.TabButton {
-//       visible: upcomingListScreen.visible
-//       //TODO: tab not implementet yet
-//       tab: upcomingListScreen
-//       text:i18n("Recording Conflicts")
-//     }
+    PlasmaComponents.TabButton {
+      visible: showConflicts
+      tab: conflictListScreen
+      text:i18n("Recording Conflicts")
+    }
   }
   PlasmaComponents.TabGroup {
     visible: model.online && !configError
@@ -111,10 +110,12 @@ Item {
       anchors.fill: parent
       recordedListModel: model.recorded
     }
-//     ConflictListScreen {
-//       id: conflictListScreen
-//       anchors.fill: parent
-//     }
+    ConflictListScreen {
+      id: conflictListScreen
+      visible: showConflicts
+      anchors.fill: parent
+      conflictListModel: model.conflict
+    }
   }
   UnavailableScreen {
     visible: !model.online || configError

@@ -42,6 +42,17 @@ function getRecordedListCallback(xhr) {
   }
 }
 
+function getConflictList() {
+  var method = "GetConflictList?Count=" + getPreferredItemsCount();
+  request(getBaseUrl("Dvr") + method, false, getConflictListCallback);
+}
+
+function getConflictListCallback(xhr) {
+  if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+    model.conflict.xml = xhr.responseText;
+  }
+}
+
 function getHostName() {
   var method = "GetHostName";
   request(getBaseUrl("Myth") + method, true, getHostNameCallback);

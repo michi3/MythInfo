@@ -4,6 +4,7 @@ import "plasmapackage:/code/MythServices.js" as Myth
 Item {
   property alias upcoming: upcomingListModel
   property alias recorded: recordedListModel
+  property alias conflict: conflictListModel
   property alias timer: timer
   property int interval
   property string hostname
@@ -19,6 +20,7 @@ Item {
       if (online) {
 	Myth.getUpcomingList();
 	Myth.getRecordedList();
+	Myth.getConflictList();
       }
       //TODO: reset indizes
     }
@@ -35,6 +37,16 @@ Item {
   }
   XmlListModel {
     id: recordedListModel
+    query: "/ProgramList/Programs/Program"
+    XmlRole { name: "title"; query: "Title/string()" }
+    XmlRole { name: "subtitle"; query: "SubTitle/string()" }
+    XmlRole { name: "start"; query: "StartTime/string()" }
+    XmlRole { name: "end"; query: "EndTime/string()" }
+    XmlRole { name: "img"; query: "Channel/IconURL/string()" }
+    XmlRole { name: "desc"; query: "Description/string()" }
+  }
+  XmlListModel {
+    id: conflictListModel
     query: "/ProgramList/Programs/Program"
     XmlRole { name: "title"; query: "Title/string()" }
     XmlRole { name: "subtitle"; query: "SubTitle/string()" }
