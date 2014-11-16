@@ -13,6 +13,7 @@ Item {
   }
   Image {
     source: "plasmapackage:/images/mythtv.png"
+    opacity: 0.5
     anchors {
       horizontalCenter: parent.horizontalCenter
       verticalCenter: parent.verticalCenter
