@@ -6,10 +6,18 @@ import "plasmapackage:/code/xdate.js" as Jxd
 
 Item {
   property QtObject statusModel
-  PlasmaExtras.Title {
-    id: hostnameTitle
+  PlasmaCore.FrameSvgItem {
+    id: hostnameFrame
+    imagePath: "widgets/frame"
+    prefix: "plain"
     anchors.horizontalCenter: parent.horizontalCenter
-    text: parent.statusModel.hostname
+    height: hostnameTitle.paintedHeight
+    width: parent.width
+    PlasmaExtras.Title {
+      id: hostnameTitle
+      anchors.horizontalCenter: parent.horizontalCenter
+      text: parent.parent.statusModel.hostname
+    }
   }
   Image {
     source: "plasmapackage:/images/mythtv.png"
@@ -21,7 +29,7 @@ Item {
   }
   Column {
     anchors {
-      top: hostnameTitle.bottom
+      top: hostnameFrame.bottom
       left: parent.left
     }
     Text {
