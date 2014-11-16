@@ -119,7 +119,7 @@ PlasmaExtras.ScrollArea {
 	  }
           text: model.desc
           wrapMode: Text.Wrap
-        }
+	}
       }
     }
     highlight: PlasmaComponents.Highlight {
